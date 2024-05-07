@@ -1,0 +1,175 @@
+<?php session_start() ?>
+<!DOCTYPE HTML>
+<html lang="en-CA">
+<head>
+    <title>La Hacienda - From Farm to Fork</title>
+    <meta name="description" content="La Hacienda delivers farm fresh organic food straight from the producer and onto your fork. All meat and produce sold is sustainably grown with utmost respect for animals and care for the future of our planet. La Hacienda is your local farmers market hooked up to the digital world, bringing your the freshest to your fingertips.">
+    <meta name="keywords" content="organic food, sustainable, farm fresh, fresh">
+    <meta name="author" content="Jan Mikhail Alexei Ong (SID: 40154849)">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <!-- BOOTSTRAP LIBRARIES -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="https://kit.fontawesome.com/6ebd7b3ed7.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <!---->
+
+    <!--GOOGLE FONT APIS-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bodoni+Moda">
+    <!---->
+
+    <!--EXTERNAL STYLESHEET-->
+    <link rel="stylesheet" href="lahacienda.css">
+    <!---->
+
+</head>
+<body>
+    <!--START PAGE HEADER-->
+    <div class="topnav" id="myTopnav">
+        <a href="/index.php"><img src="assets/logo-white.png" style="width:150px; float:left" class="m-1 mx-2 p-1"></a>
+        <a href="#" class="element" style="float:left">
+          <?php if(isset($_SESSION['session_username'])) { ?>
+          <?php echo "Welcome " . $_SESSION['session_username']; ?>
+          <?php } ?>
+        </a>
+        <a href="javascript:void(0);" class="icon element" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+        <a href="/cart.php" class="element">Cart</a>
+        <a href="/login.php" class="element">Register/Login</a>
+        <a href="/about.php" class="element">About</a>
+        <a href="/contact.php" class="element">Contact</a>
+        <a href="/market.php" class="active element">Shop the Market!</a>
+      </div>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topnav";
+          }
+        }
+    </script>
+    <!--END PAGE HEADER-->
+
+    <!--CONTENT-->
+    <div class="hero-container">
+        <img src="/assets/hero_shrooms.jpg" style="width:100%;">
+        <div class="centered">
+            <h1 style="font-size: 100px;">Mushrooms</h1>
+        </div>
+    </div> 
+    <div class="container">
+        <div class="row pt-5 pb-3">
+            <div class="col-sm-3 text-center" style="margin-top: 1%">
+                10 products
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm-3">
+                <form action="#">
+                    <select name="sort" id="sort">
+                        <option value="default">Sort</option>
+                        <option value="alphaaz">Alphabetical A-Z</option>
+                        <option value="alphaza">Alphabetical Z-A</option>
+                        <option value="pricelowhigh">Price Low to High</option>
+                        <option value="pricehighlow">Price High to Low</option>
+                    </select>
+                  </form>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row container-fluid pt-2 py-2">
+            <div class="col-sm-4 text-center">
+                <a href="/products/cremini.html">
+                    <img src="/products/product_photos/cremini.jpg" class="img-fluid pb-3" style="width:75%;" />
+                    <h5>CREMINI MUSHROOM</h5>
+                    <p>Alberta Mushroom Farms<br/>$3.00</p>
+                </a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="/products/enoki.html">
+                    <img src="/products/product_photos/enoki.jpg" class="img-fluid pb-3" style="width:75%;" />
+                    <h5>ENOKI MUSHROOM</h5>
+                    <p>Alberta Mushroom Farms<br/>$3.00</p>
+                </a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="/products/kingtrumpet.html">
+                    <img src="/products/product_photos/king trumpet.jpg" class="img-fluid pb-3" style="width:75%;" />
+                    <h5>KING TRUMPET MUSHROOM</h5>
+                    <p>Alberta Mushroom Farms<br/>$3.00</p>
+                </a>
+            </div>
+        </div>
+        <div class="row container-fluid pt-2 py-2">
+            <div class="col-sm-4 text-center">
+                <a href="/products/mixed.html">
+                    <img src="/products/product_photos/mushroom_mix.jpg" class="img-fluid pb-3" style="width:75%;" />
+                    <h5>MUSHROOM MIX</h5>
+                    <p>Alberta Mushroom Farms<br/>$3.00</p>
+                </a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="/products/oyster.html">
+                    <img src="/products/product_photos/oyster.jpg" class="img-fluid pb-3" style="width:75%;" />
+                    <h5>OYSTER MUSHROOM</h5>
+                    <p>Alberta Mushroom Farms<br/>$3.00</p>
+                </a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="/products/poplar.html">
+                    <img src="/products/product_photos/poplar.jpg" class="img-fluid pb-3" style="width:75%;" />
+                    <h5>POPLAR MUSHROOM</h5>
+                    <p>Alberta Mushroom Farms<br/>$3.00</p>
+                </a>
+            </div>
+        </div>
+        <div class="row container-fluid pt-2 py-2">
+            <div class="col-sm-5 text-center"></div>
+            <div class="col-sm-2 text-center">
+                <div class="pagination py-5 center">
+                    <a href="#">&laquo;</a>
+                    <a class="active" href="#">1</a>
+                    <a href="shrooms2.html">2</a>
+                    <a href="shrooms2.html">&raquo;</a>
+                  </div> 
+            </div>
+            <div class="col-sm-5 text-center"></div>
+        </div>
+    </div>
+    <!--END CONTENT-->
+
+    <!--FOOTER-->
+    <footer class="blog-footer pt-3">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <a href="about.php">About Us</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="shipping.html">Shipping & Returns</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="careers.html">Join Our Team</a>
+                <a href="supplier.html">Become a Supplier</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="employee.php">Employee Login</a>
+            </div>
+            <div class="col-sm-4 text-center">
+              <form action="#">
+                  <label for="email" style="color: #f2f2f2;">Subscribe to us for exclusive offers!</label><br/>
+                  <input type="text" id="email" name="email" style="width:50%;" placeholder="Your e-mail address...">
+            </div> 
+        </div>
+    </footer>
+
+    <!--BOTTOM BAR-->
+    <footer class="container-fluid text-center pt-3">
+        <p style="font-family: 'Bodoni Moda'; color: #f2f2f2; font-size:small;">&#169; La Hacienda - Farm to Fork | All Rights Reserved.</p>
+    </footer>
+    <!--END FOOTER-->
+</body>
+</html>

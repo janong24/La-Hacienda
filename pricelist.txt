@@ -1,0 +1,28 @@
+cremini 3
+enoki 3
+king trumpet 4
+mushroom mix 5
+oyster 4
+poplar 5
+porcini 8
+portabella 6
+shiitake 4
+white button 3
+
+6
+ap flour 2.5
+bread flour 2.5
+unbleached flour 2.5
+brown rice 3
+quinoa tricolor 5
+wild rice 4
+
+8
+blue cheese 6
+brie 6
+gouda 5
+parmesan 4
+white cheddar 3
+yogurt 2
+white eggs 3
+brown eggs 3

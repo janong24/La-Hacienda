@@ -1,0 +1,406 @@
+<?php session_start() ?>
+<!DOCTYPE HTML>
+<html lang="en-CA">
+<head>
+    <title>La Hacienda - From Farm to Fork</title>
+    <meta name="description" content="La Hacienda delivers farm fresh organic food straight from the producer and onto your fork. All meat and produce sold is sustainably grown with utmost respect for animals and care for the future of our planet. La Hacienda is your local farmers market hooked up to the digital world, bringing your the freshest to your fingertips.">
+    <meta name="keywords" content="organic food, sustainable, farm fresh, fresh">
+    <meta name="author" content="Jan Mikhail Alexei Ong (SID: 40154849)">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <!-- BOOTSTRAP LIBRARIES -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script src="https://kit.fontawesome.com/6ebd7b3ed7.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <!---->
+
+    <!--GOOGLE FONT APIS-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bodoni+Moda">
+    <!---->
+
+    <!--EXTERNAL STYLESHEET & JS-->
+    <link rel="stylesheet" href="lahacienda.css">
+    <script src="lahacienda.js"></script>
+    <!---->
+
+</head>
+<body>
+    <!--START PAGE HEADER-->
+    <div class="topnav" id="myTopnav">
+        <a href="/index.php"><img src="assets/logo-white.png" style="width:150px; float:left" class="m-1 mx-2 p-1"></a>
+        <a href="#" class="element" style="float:left">
+          <?php if(isset($_SESSION['session_username'])) { ?>
+          <?php echo "Welcome " . $_SESSION['session_username']; ?>
+          <?php } ?>
+        </a>
+        <a href="javascript:void(0);" class="icon element" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+        <a href="/cart.php" class="element">Cart</a>
+        <a href="/login.php" class="element">Register/Login</a>
+        <a href="/about.php" class="element">About</a>
+        <a href="/contact.php" class="element">Contact</a>
+        <a href="/market.php" class="active element">Shop the Market!</a>
+      </div>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topnav";
+          }
+        }
+    </script>
+    <!--END PAGE HEADER-->
+
+    <div class="pb-3">
+        <img src="assets/splash.jpg" style="width:100%" />
+    </div>
+    
+    <h1 class="text-center" style="font-weight: bold;">LA&nbsp;&nbsp;HACIENDA</h1>
+    <div class="row container-fluid" style="padding-left: 10%; padding-right: 10%; padding-top: 1%; padding-bottom:2%">
+        <div class="col-sm-3 text-center">
+            <img src="/assets/deliver.png" height="75px">
+            <h3>QUICK DELIVERIES</h3>
+            <p>Your food is delivered from your producer to your fork, fast. Rapid deliveries ensure that food is at its freshest.</p>
+        </div>
+        <div class="col-sm-3 text-center">
+            <img src="/assets/waste.png" height="75px">
+            <h3>REDUCED WASTE</h3>
+            <p>All orders will be packed in an eco-friendly manner, with the least amount of plastic possible.</p>
+        </div>
+        <div class="col-sm-3 text-center">
+            <img src="assets/local.png" height="75px">
+            <h3>SUPPORT LOCAL</h3>
+            <p>We select producers who are closest to you, reducing our carbon footprint upon delivery and providing economic opportunities.</p>
+        </div>
+        <div class="col-sm-3 text-center">
+            <img src="assets/mission.png" height="75px">
+            <h3>OUR MISSION</h3>
+            <p>To build a sustainable food eco-system, suporting local producers and reducing waste.</p>
+        </div>
+    </div>
+
+    
+    <!--Carousel-->
+    <div class="row container-fluid justify-content-center" style="padding-left: 10%; padding-right: 10%; padding-top: 1%; padding-bottom:2%">
+        <h2 class="text-center">TODAY'S&nbsp;&nbsp;DEALS</h1>
+        <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+    <div class="controls-top">
+      <a class="btn-floating" href="#my-carousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+      <a class="btn-floating" href="#my-carousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+
+    <ol class="carousel-indicators">
+      <li data-target="#my-carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#my-carousel" data-slide-to="1"></li>
+      <li data-target="#my-carousel" data-slide-to="2"></li>
+    </ol>
+    <?php $string_data = file_get_contents("products.php"); ?>
+    <?php $products = unserialize($string_data); ?>
+    <div class="carousel-inner" role="listbox">
+      <!--First slide-->
+      <div class="carousel-item active">
+        <div class="row">
+          <div class="col-md-4 justify-content-center">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Cremini Mushrooms", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                  <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Porcini Mushrooms", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Mushroom Mix", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Second slide-->
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Brie", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Parmesan Cheese", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button></a> 
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Roquefort", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--Third slide-->
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Filet Mignon", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Lamb Chops", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+            <?php $key = 1 + array_search("Beef Short Ribs", array_column($products, 'name')); ?>
+              <a href="<?php echo $products[$key]['file']; ?>">
+              <img class="card-img-top img-fluid" src="<?php echo $products[$key]['image']; ?>" alt="<?php echo $products[$key]['name']; ?>" />
+              <div class="card-body">
+                <h4 class="card-title"><?php echo $products[$key]['name']; ?></h4>
+              </a>
+                <p class="card-text">
+                    <span style="text-decoration: line-through;">$<?php echo $products[$key]['price']; ?></span>
+                    <?php $discount = number_format($products[$key]['price'] * (1 - $products[$key]['promo_amt']), "2"); ?>
+                    <br /> <span style="font-weight: bolder; font-size: large;">$<?php echo $discount; ?></span>
+                    <br /> <span style="font-weight: bolder; font-size: large;">Save <?php echo 100*$products[$key]['promo_amt']; ?>%!</span>
+                </p>
+                <a href="<?php echo $products[$key]['file']; ?>"><button type="button" class="btn btn-light btn-block btn-outline-secondary">GO!</button> </a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        Item added to cart!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="pt-4 pb-4" style="padding-right: 5%; padding-left: 5%;">
+    <h2 class="text-center pt-3">POPULAR AISLES</h1>
+    <div class="row container-fluid pt-2 py-5">
+        <div class="col-sm-4 text-center thumb-container">
+            <a href="shrooms.html">
+                <img src="assets/tile_shrooms.jpg" style="width:75%;"/>
+                <div class="content">
+                    <h2>Mushrooms</h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-4 text-center thumb-container">
+            <a href="grains.html">
+                <img src="assets/tile_grains.jpg" style="width:75%;"/>
+                <div class="content">
+                    <h2>Grains</h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-4 text-center thumb-container">
+            <a href="dairy.html">
+                <img src="assets/tile_dairy.jpg" class="img-fluid" style="width:75%;" />
+                <div class="content">
+                    <h2>Dairy</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row container-fluid pt-2 py-5">
+      <div class="col-sm-4 text-center thumb-container">
+          <a href="beef.html">
+              <img src="assets/tile_beef.jpg" style="width:75%;"/>
+              <div class="content">
+                  <h2>Beef</h2>
+              </div>
+          </a>
+      </div>
+      <div class="col-sm-4 text-center thumb-container">
+          <a href="chicken.html">
+              <img src="assets/tile_chicken.jpg" style="width:75%;"/>
+              <div class="content">
+                  <h2>Chicken</h2>
+              </div>
+          </a>
+      </div>
+      <div class="col-sm-4 text-center thumb-container">
+          <a href="lamb.html">
+              <img src="assets/tile_lamb.jpg" class="img-fluid" style="width:75%;" />
+              <div class="content">
+                  <h2>Lamb</h2>
+              </div>
+          </a>
+      </div>
+  </div>
+    </div>
+
+    <div class="pt-4 pb-4" style="padding-right: 5%; padding-left: 5%;">
+    <h2 class="text-center pt-3">HEAR FROM OUR CUSTOMERS</h1>
+        <div class="row container-fluid pt-2 py-5">
+            <div class="col-sm-4 text-center thumb-container">
+                <h4>Now this is what I call fresh! I'm supporting local from now on!</h3>
+                <p>&#8212;John D.</p>
+            </div>
+            <div class="col-sm-4 text-center thumb-container">
+                <h4>For the past few weeks, we've hade an overwhelmingly positive experience at our restaurant, La Casa de Alvarez. Ingredients are always of the highest quality, without compromise.</h4>
+                <p>&#8212;Jean D.</p>
+            </div>
+            <div class="col-sm-4 text-center thumb-container">
+                <h4>I could never get something this fresh and affordable from my grocers. La Hacienda is the best!</h4>
+                <p>&#8212;Juan P.</p>
+            </div>
+        </div>
+    </div>
+
+    <!--FOOTER-->
+    <footer class="blog-footer pt-3">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <a href="about.php">About Us</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="shipping.html">Shipping & Returns</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <a href="careers.html">Join Our Team</a>
+                <a href="supplier.html">Become a Supplier</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="employee.php">Employee Login</a>
+            </div>
+            <div class="col-sm-4 text-center">
+                <form action="#">
+                    <label for="email" style="color: #f2f2f2;">Subscribe to us for exclusive offers!</label><br/>
+                    <input type="text" id="email" name="email" style="width:50%;" placeholder="Your e-mail address...">
+            </div>
+        </div>
+    </footer>
+
+    <!--BOTTOM BAR-->
+    <footer class="container-fluid text-center pt-3">
+        <p style="font-family: 'Bodoni Moda'; color: #f2f2f2; font-size:small;">&#169; La Hacienda - Farm to Fork | All Rights Reserved.</p>
+    </footer>
+    <!--END FOOTER-->
+</body>
+</html>
